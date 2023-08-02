@@ -1,6 +1,5 @@
 //go:build !no_runtime_type_checking
 
-// CDK constructs to use OpenID Connect for authenticating your Github Action workflow with AWS IAM
 package awscdkgithuboidc
 
 import (
@@ -84,6 +83,14 @@ func (g *jsiiProxy_GithubActionsRole) validateGrantParameters(grantee awsiam.IPr
 	return nil
 }
 
+func (g *jsiiProxy_GithubActionsRole) validateGrantAssumeRoleParameters(identity awsiam.IPrincipal) error {
+	if identity == nil {
+		return fmt.Errorf("parameter identity is required, but nil was provided")
+	}
+
+	return nil
+}
+
 func (g *jsiiProxy_GithubActionsRole) validateGrantPassRoleParameters(identity awsiam.IPrincipal) error {
 	if identity == nil {
 		return fmt.Errorf("parameter identity is required, but nil was provided")
@@ -93,6 +100,18 @@ func (g *jsiiProxy_GithubActionsRole) validateGrantPassRoleParameters(identity a
 }
 
 func (g *jsiiProxy_GithubActionsRole) validateWithoutPolicyUpdatesParameters(options *awsiam.WithoutPolicyUpdatesOptions) error {
+	if err := _jsii_.ValidateStruct(options, func() string { return "parameter options" }); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func validateGithubActionsRole_CustomizeRolesParameters(scope constructs.Construct, options *awsiam.CustomizeRolesOptions) error {
+	if scope == nil {
+		return fmt.Errorf("parameter scope is required, but nil was provided")
+	}
+
 	if err := _jsii_.ValidateStruct(options, func() string { return "parameter options" }); err != nil {
 		return err
 	}
@@ -120,7 +139,7 @@ func validateGithubActionsRole_FromRoleArnParameters(scope constructs.Construct,
 	return nil
 }
 
-func validateGithubActionsRole_FromRoleNameParameters(scope constructs.Construct, id *string, roleName *string) error {
+func validateGithubActionsRole_FromRoleNameParameters(scope constructs.Construct, id *string, roleName *string, options *awsiam.FromRoleNameOptions) error {
 	if scope == nil {
 		return fmt.Errorf("parameter scope is required, but nil was provided")
 	}
@@ -131,6 +150,10 @@ func validateGithubActionsRole_FromRoleNameParameters(scope constructs.Construct
 
 	if roleName == nil {
 		return fmt.Errorf("parameter roleName is required, but nil was provided")
+	}
+
+	if err := _jsii_.ValidateStruct(options, func() string { return "parameter options" }); err != nil {
+		return err
 	}
 
 	return nil
@@ -144,9 +167,25 @@ func validateGithubActionsRole_IsConstructParameters(x interface{}) error {
 	return nil
 }
 
+func validateGithubActionsRole_IsOwnedResourceParameters(construct constructs.IConstruct) error {
+	if construct == nil {
+		return fmt.Errorf("parameter construct is required, but nil was provided")
+	}
+
+	return nil
+}
+
 func validateGithubActionsRole_IsResourceParameters(construct constructs.IConstruct) error {
 	if construct == nil {
 		return fmt.Errorf("parameter construct is required, but nil was provided")
+	}
+
+	return nil
+}
+
+func validateGithubActionsRole_IsRoleParameters(x interface{}) error {
+	if x == nil {
+		return fmt.Errorf("parameter x is required, but nil was provided")
 	}
 
 	return nil

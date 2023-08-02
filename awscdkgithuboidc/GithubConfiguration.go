@@ -1,4 +1,3 @@
-// CDK constructs to use OpenID Connect for authenticating your Github Action workflow with AWS IAM
 package awscdkgithuboidc
 
 
@@ -35,6 +34,10 @@ type GithubConfiguration struct {
 	//   'environment:Production'
 	//
 	// See: https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect#examples
+	//
+	// Default: '*'
+	//
+	// You may use this value to only allow Github to assume the role on specific branches, tags, environments, pull requests etc.
 	//
 	// Experimental.
 	Filter *string `field:"optional" json:"filter" yaml:"filter"`

@@ -1,4 +1,3 @@
-// CDK constructs to use OpenID Connect for authenticating your Github Action workflow with AWS IAM
 package awscdkgithuboidc
 
 import (

@@ -1,6 +1,5 @@
 //go:build no_runtime_type_checking
 
-// CDK constructs to use OpenID Connect for authenticating your Github Action workflow with AWS IAM
 package awscdkgithuboidc
 
 // Building without runtime type checking enabled, so all the below just return nil
@@ -26,6 +25,10 @@ func validateGithubActionsIdentityProvider_FromOpenIdConnectProviderArnParameter
 }
 
 func validateGithubActionsIdentityProvider_IsConstructParameters(x interface{}) error {
+	return nil
+}
+
+func validateGithubActionsIdentityProvider_IsOwnedResourceParameters(construct constructs.IConstruct) error {
 	return nil
 }
 

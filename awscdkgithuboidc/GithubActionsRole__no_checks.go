@@ -1,6 +1,5 @@
 //go:build no_runtime_type_checking
 
-// CDK constructs to use OpenID Connect for authenticating your Github Action workflow with AWS IAM
 package awscdkgithuboidc
 
 // Building without runtime type checking enabled, so all the below just return nil
@@ -37,6 +36,10 @@ func (g *jsiiProxy_GithubActionsRole) validateGrantParameters(grantee awsiam.IPr
 	return nil
 }
 
+func (g *jsiiProxy_GithubActionsRole) validateGrantAssumeRoleParameters(identity awsiam.IPrincipal) error {
+	return nil
+}
+
 func (g *jsiiProxy_GithubActionsRole) validateGrantPassRoleParameters(identity awsiam.IPrincipal) error {
 	return nil
 }
@@ -45,11 +48,15 @@ func (g *jsiiProxy_GithubActionsRole) validateWithoutPolicyUpdatesParameters(opt
 	return nil
 }
 
+func validateGithubActionsRole_CustomizeRolesParameters(scope constructs.Construct, options *awsiam.CustomizeRolesOptions) error {
+	return nil
+}
+
 func validateGithubActionsRole_FromRoleArnParameters(scope constructs.Construct, id *string, roleArn *string, options *awsiam.FromRoleArnOptions) error {
 	return nil
 }
 
-func validateGithubActionsRole_FromRoleNameParameters(scope constructs.Construct, id *string, roleName *string) error {
+func validateGithubActionsRole_FromRoleNameParameters(scope constructs.Construct, id *string, roleName *string, options *awsiam.FromRoleNameOptions) error {
 	return nil
 }
 
@@ -57,7 +64,15 @@ func validateGithubActionsRole_IsConstructParameters(x interface{}) error {
 	return nil
 }
 
+func validateGithubActionsRole_IsOwnedResourceParameters(construct constructs.IConstruct) error {
+	return nil
+}
+
 func validateGithubActionsRole_IsResourceParameters(construct constructs.IConstruct) error {
+	return nil
+}
+
+func validateGithubActionsRole_IsRoleParameters(x interface{}) error {
 	return nil
 }
 
