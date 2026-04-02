@@ -36,11 +36,11 @@ func (g *jsiiProxy_GithubActionsRole) validateGrantParameters(grantee awsiam.IPr
 	return nil
 }
 
-func (g *jsiiProxy_GithubActionsRole) validateGrantAssumeRoleParameters(identity awsiam.IPrincipal) error {
+func (g *jsiiProxy_GithubActionsRole) validateGrantAssumeRoleParameters(grantee awsiam.IPrincipal) error {
 	return nil
 }
 
-func (g *jsiiProxy_GithubActionsRole) validateGrantPassRoleParameters(identity awsiam.IPrincipal) error {
+func (g *jsiiProxy_GithubActionsRole) validateGrantPassRoleParameters(grantee awsiam.IPrincipal) error {
 	return nil
 }
 
@@ -49,6 +49,10 @@ func (g *jsiiProxy_GithubActionsRole) validateWithoutPolicyUpdatesParameters(opt
 }
 
 func validateGithubActionsRole_CustomizeRolesParameters(scope constructs.Construct, options *awsiam.CustomizeRolesOptions) error {
+	return nil
+}
+
+func validateGithubActionsRole_FromLookupParameters(scope constructs.Construct, id *string, options *awsiam.RoleLookupOptions) error {
 	return nil
 }
 

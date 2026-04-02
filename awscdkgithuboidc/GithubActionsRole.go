@@ -1,10 +1,10 @@
 package awscdkgithuboidc
 
 import (
-	_init_ "github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v2/jsii"
+	_init_ "github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v3/jsii"
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
 
-	"github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v2/internal"
+	"github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v3/internal"
 	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/constructs-go/constructs/v10"
@@ -86,6 +86,9 @@ type GithubActionsRole interface {
 	// Returns the name of the role.
 	// Experimental.
 	RoleName() *string
+	// A reference to a Role resource.
+	// Experimental.
+	RoleRef() *awsiam.RoleReference
 	// The stack in which this resource is defined.
 	// Experimental.
 	Stack() awscdk.Stack
@@ -100,15 +103,9 @@ type GithubActionsRole interface {
 	// If there is no default policy attached to this role, it will be created.
 	// Experimental.
 	AddToPrincipalPolicy(statement awsiam.PolicyStatement) *awsiam.AddToPrincipalPolicyResult
-	// Apply the given removal policy to this resource.
+	// Skip applyRemovalPolicy if role synthesis is prevented by customizeRoles.
 	//
-	// The Removal Policy controls what happens to this resource when it stops
-	// being managed by CloudFormation, either because you've removed it from the
-	// CDK application or because you've made a change that requires the resource
-	// to be replaced.
-	//
-	// The resource can be deleted (`RemovalPolicy.DESTROY`), or left in your AWS
-	// account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
+	// Because in this case, this construct does not have a CfnResource in the tree.
 	// Experimental.
 	ApplyRemovalPolicy(policy awscdk.RemovalPolicy)
 	// Attaches a policy to this role.
@@ -136,10 +133,10 @@ type GithubActionsRole interface {
 	Grant(grantee awsiam.IPrincipal, actions ...*string) awsiam.Grant
 	// Grant permissions to the given principal to assume this role.
 	// Experimental.
-	GrantAssumeRole(identity awsiam.IPrincipal) awsiam.Grant
+	GrantAssumeRole(grantee awsiam.IPrincipal) awsiam.Grant
 	// Grant permissions to the given principal to pass this role.
 	// Experimental.
-	GrantPassRole(identity awsiam.IPrincipal) awsiam.Grant
+	GrantPassRole(grantee awsiam.IPrincipal) awsiam.Grant
 	// Returns a string representation of this construct.
 	// Experimental.
 	ToString() *string
@@ -279,6 +276,16 @@ func (j *jsiiProxy_GithubActionsRole) RoleName() *string {
 	return returns
 }
 
+func (j *jsiiProxy_GithubActionsRole) RoleRef() *awsiam.RoleReference {
+	var returns *awsiam.RoleReference
+	_jsii_.Get(
+		j,
+		"roleRef",
+		&returns,
+	)
+	return returns
+}
+
 func (j *jsiiProxy_GithubActionsRole) Stack() awscdk.Stack {
 	var returns awscdk.Stack
 	_jsii_.Get(
@@ -387,6 +394,26 @@ func GithubActionsRole_CustomizeRoles(scope constructs.Construct, options *awsia
 	)
 }
 
+// Lookup an existing Role.
+// Experimental.
+func GithubActionsRole_FromLookup(scope constructs.Construct, id *string, options *awsiam.RoleLookupOptions) awsiam.IRole {
+	_init_.Initialize()
+
+	if err := validateGithubActionsRole_FromLookupParameters(scope, id, options); err != nil {
+		panic(err)
+	}
+	var returns awsiam.IRole
+
+	_jsii_.StaticInvoke(
+		"aws-cdk-github-oidc.GithubActionsRole",
+		"fromLookup",
+		[]interface{}{scope, id, options},
+		&returns,
+	)
+
+	return returns
+}
+
 // Import an external role by ARN.
 //
 // If the imported Role ARN is a Token (such as a
@@ -441,8 +468,22 @@ func GithubActionsRole_FromRoleName(scope constructs.Construct, id *string, role
 
 // Checks if `x` is a construct.
 //
+// Use this method instead of `instanceof` to properly detect `Construct`
+// instances, even when the construct library is symlinked.
+//
+// Explanation: in JavaScript, multiple copies of the `constructs` library on
+// disk are seen as independent, completely different libraries. As a
+// consequence, the class `Construct` in each copy of the `constructs` library
+// is seen as a different class, and an instance of one class will not test as
+// `instanceof` the other class. `npm install` will not create installations
+// like this, but users may manually symlink construct libraries together or
+// use a monorepo tool: in those cases, multiple copies of the `constructs`
+// library can be accidentally installed, and `instanceof` will behave
+// unpredictably. It is safest to avoid using `instanceof`, and using
+// this type-testing method instead.
+//
 // Returns: true if `x` is an object created from a class which extends `Construct`.
-// Deprecated: use `x instanceof Construct` instead.
+// Experimental.
 func GithubActionsRole_IsConstruct(x interface{}) *bool {
 	_init_.Initialize()
 
@@ -518,6 +559,17 @@ func GithubActionsRole_IsRole(x interface{}) *bool {
 		&returns,
 	)
 
+	return returns
+}
+
+func GithubActionsRole_PROPERTY_INJECTION_ID() *string {
+	_init_.Initialize()
+	var returns *string
+	_jsii_.StaticGet(
+		"aws-cdk-github-oidc.GithubActionsRole",
+		"PROPERTY_INJECTION_ID",
+		&returns,
+	)
 	return returns
 }
 
@@ -652,8 +704,8 @@ func (g *jsiiProxy_GithubActionsRole) Grant(grantee awsiam.IPrincipal, actions .
 	return returns
 }
 
-func (g *jsiiProxy_GithubActionsRole) GrantAssumeRole(identity awsiam.IPrincipal) awsiam.Grant {
-	if err := g.validateGrantAssumeRoleParameters(identity); err != nil {
+func (g *jsiiProxy_GithubActionsRole) GrantAssumeRole(grantee awsiam.IPrincipal) awsiam.Grant {
+	if err := g.validateGrantAssumeRoleParameters(grantee); err != nil {
 		panic(err)
 	}
 	var returns awsiam.Grant
@@ -661,15 +713,15 @@ func (g *jsiiProxy_GithubActionsRole) GrantAssumeRole(identity awsiam.IPrincipal
 	_jsii_.Invoke(
 		g,
 		"grantAssumeRole",
-		[]interface{}{identity},
+		[]interface{}{grantee},
 		&returns,
 	)
 
 	return returns
 }
 
-func (g *jsiiProxy_GithubActionsRole) GrantPassRole(identity awsiam.IPrincipal) awsiam.Grant {
-	if err := g.validateGrantPassRoleParameters(identity); err != nil {
+func (g *jsiiProxy_GithubActionsRole) GrantPassRole(grantee awsiam.IPrincipal) awsiam.Grant {
+	if err := g.validateGrantPassRoleParameters(grantee); err != nil {
 		panic(err)
 	}
 	var returns awsiam.Grant
@@ -677,7 +729,7 @@ func (g *jsiiProxy_GithubActionsRole) GrantPassRole(identity awsiam.IPrincipal) 
 	_jsii_.Invoke(
 		g,
 		"grantPassRole",
-		[]interface{}{identity},
+		[]interface{}{grantee},
 		&returns,
 	)
 

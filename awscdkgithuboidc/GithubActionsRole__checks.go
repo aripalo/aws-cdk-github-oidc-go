@@ -83,17 +83,17 @@ func (g *jsiiProxy_GithubActionsRole) validateGrantParameters(grantee awsiam.IPr
 	return nil
 }
 
-func (g *jsiiProxy_GithubActionsRole) validateGrantAssumeRoleParameters(identity awsiam.IPrincipal) error {
-	if identity == nil {
-		return fmt.Errorf("parameter identity is required, but nil was provided")
+func (g *jsiiProxy_GithubActionsRole) validateGrantAssumeRoleParameters(grantee awsiam.IPrincipal) error {
+	if grantee == nil {
+		return fmt.Errorf("parameter grantee is required, but nil was provided")
 	}
 
 	return nil
 }
 
-func (g *jsiiProxy_GithubActionsRole) validateGrantPassRoleParameters(identity awsiam.IPrincipal) error {
-	if identity == nil {
-		return fmt.Errorf("parameter identity is required, but nil was provided")
+func (g *jsiiProxy_GithubActionsRole) validateGrantPassRoleParameters(grantee awsiam.IPrincipal) error {
+	if grantee == nil {
+		return fmt.Errorf("parameter grantee is required, but nil was provided")
 	}
 
 	return nil
@@ -112,6 +112,25 @@ func validateGithubActionsRole_CustomizeRolesParameters(scope constructs.Constru
 		return fmt.Errorf("parameter scope is required, but nil was provided")
 	}
 
+	if err := _jsii_.ValidateStruct(options, func() string { return "parameter options" }); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func validateGithubActionsRole_FromLookupParameters(scope constructs.Construct, id *string, options *awsiam.RoleLookupOptions) error {
+	if scope == nil {
+		return fmt.Errorf("parameter scope is required, but nil was provided")
+	}
+
+	if id == nil {
+		return fmt.Errorf("parameter id is required, but nil was provided")
+	}
+
+	if options == nil {
+		return fmt.Errorf("parameter options is required, but nil was provided")
+	}
 	if err := _jsii_.ValidateStruct(options, func() string { return "parameter options" }); err != nil {
 		return err
 	}
