@@ -18,17 +18,17 @@ func init() {
 			_jsii_.MemberMethod{JsiiMethod: "getResourceArnAttribute", GoMethod: "GetResourceArnAttribute"},
 			_jsii_.MemberMethod{JsiiMethod: "getResourceNameAttribute", GoMethod: "GetResourceNameAttribute"},
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
+			_jsii_.MemberProperty{JsiiProperty: "oidcProviderArn", GoGetter: "OidcProviderArn"},
+			_jsii_.MemberProperty{JsiiProperty: "oidcProviderIssuer", GoGetter: "OidcProviderIssuer"},
 			_jsii_.MemberProperty{JsiiProperty: "oidcProviderRef", GoGetter: "OidcProviderRef"},
-			_jsii_.MemberProperty{JsiiProperty: "openIdConnectProviderArn", GoGetter: "OpenIdConnectProviderArn"},
-			_jsii_.MemberProperty{JsiiProperty: "openIdConnectProviderIssuer", GoGetter: "OpenIdConnectProviderIssuer"},
-			_jsii_.MemberProperty{JsiiProperty: "openIdConnectProviderthumbprints", GoGetter: "OpenIdConnectProviderthumbprints"},
+			_jsii_.MemberProperty{JsiiProperty: "oidcProviderThumbprints", GoGetter: "OidcProviderThumbprints"},
 			_jsii_.MemberProperty{JsiiProperty: "physicalName", GoGetter: "PhysicalName"},
 			_jsii_.MemberProperty{JsiiProperty: "stack", GoGetter: "Stack"},
 			_jsii_.MemberMethod{JsiiMethod: "toString", GoMethod: "ToString"},
 		},
 		func() interface{} {
 			j := jsiiProxy_GithubActionsIdentityProvider{}
-			_jsii_.InitJsiiProxy(&j.Type__awsiamOpenIdConnectProvider)
+			_jsii_.InitJsiiProxy(&j.Type__awsiamOidcProviderNative)
 			_jsii_.InitJsiiProxy(&j.jsiiProxy_IGithubActionsIdentityProvider)
 			return &j
 		},
@@ -86,14 +86,14 @@ func init() {
 			_jsii_.MemberMethod{JsiiMethod: "applyRemovalPolicy", GoMethod: "ApplyRemovalPolicy"},
 			_jsii_.MemberProperty{JsiiProperty: "env", GoGetter: "Env"},
 			_jsii_.MemberProperty{JsiiProperty: "node", GoGetter: "Node"},
+			_jsii_.MemberProperty{JsiiProperty: "oidcProviderArn", GoGetter: "OidcProviderArn"},
+			_jsii_.MemberProperty{JsiiProperty: "oidcProviderIssuer", GoGetter: "OidcProviderIssuer"},
 			_jsii_.MemberProperty{JsiiProperty: "oidcProviderRef", GoGetter: "OidcProviderRef"},
-			_jsii_.MemberProperty{JsiiProperty: "openIdConnectProviderArn", GoGetter: "OpenIdConnectProviderArn"},
-			_jsii_.MemberProperty{JsiiProperty: "openIdConnectProviderIssuer", GoGetter: "OpenIdConnectProviderIssuer"},
 			_jsii_.MemberProperty{JsiiProperty: "stack", GoGetter: "Stack"},
 		},
 		func() interface{} {
 			j := jsiiProxy_IGithubActionsIdentityProvider{}
-			_jsii_.InitJsiiProxy(&j.Type__awsiamIOpenIdConnectProvider)
+			_jsii_.InitJsiiProxy(&j.Type__awsiamIOidcProvider)
 			return &j
 		},
 	)

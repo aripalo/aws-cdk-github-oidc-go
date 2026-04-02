@@ -1,10 +1,10 @@
 package awscdkgithuboidc
 
 import (
-	_init_ "github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v3/jsii"
+	_init_ "github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v4/jsii"
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
 
-	"github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v3/internal"
+	"github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v4/internal"
 	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/constructs-go/constructs/v10"

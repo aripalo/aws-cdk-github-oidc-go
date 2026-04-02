@@ -1,4 +1,4 @@
-module github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v3
+module github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v4
 
 go 1.25
 
