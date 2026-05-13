@@ -7,6 +7,8 @@ import (
 	"github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v4/internal"
 	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
+	"github.com/aws/aws-cdk-go/awscdk/v2/interfaces"
+	"github.com/aws/aws-cdk-go/awscdk/v2/interfaces/interfacesawsiam"
 	"github.com/aws/constructs-go/constructs/v10"
 )
 
@@ -37,17 +39,21 @@ type GithubActionsRole interface {
 	AssumeRolePolicy() awsiam.PolicyDocument
 	// The environment this resource belongs to.
 	//
-	// For resources that are created and managed by the CDK
-	// (generally, those created by creating new class instances like Role, Bucket, etc.),
-	// this is always the same as the environment of the stack they belong to;
-	// however, for imported resources
-	// (those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-	// that might be different than the stack they were imported into.
+	// For resources that are created and managed in a Stack (those created by
+	// creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+	// is always the same as the environment of the stack they belong to.
+	//
+	// For referenced resources (those obtained from referencing methods like
+	// `Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+	// different than the stack they were imported into.
 	// Experimental.
-	Env() *awscdk.ResourceEnvironment
+	Env() *interfaces.ResourceEnvironment
 	// The principal to grant permissions to.
 	// Experimental.
 	GrantPrincipal() awsiam.IPrincipal
+	// Collection of grant methods for a Role.
+	// Experimental.
+	Grants() awsiam.RoleGrants
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
@@ -88,7 +94,7 @@ type GithubActionsRole interface {
 	RoleName() *string
 	// A reference to a Role resource.
 	// Experimental.
-	RoleRef() *awsiam.RoleReference
+	RoleRef() *interfacesawsiam.RoleReference
 	// The stack in which this resource is defined.
 	// Experimental.
 	Stack() awscdk.Stack
@@ -176,8 +182,8 @@ func (j *jsiiProxy_GithubActionsRole) AssumeRolePolicy() awsiam.PolicyDocument {
 	return returns
 }
 
-func (j *jsiiProxy_GithubActionsRole) Env() *awscdk.ResourceEnvironment {
-	var returns *awscdk.ResourceEnvironment
+func (j *jsiiProxy_GithubActionsRole) Env() *interfaces.ResourceEnvironment {
+	var returns *interfaces.ResourceEnvironment
 	_jsii_.Get(
 		j,
 		"env",
@@ -191,6 +197,16 @@ func (j *jsiiProxy_GithubActionsRole) GrantPrincipal() awsiam.IPrincipal {
 	_jsii_.Get(
 		j,
 		"grantPrincipal",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_GithubActionsRole) Grants() awsiam.RoleGrants {
+	var returns awsiam.RoleGrants
+	_jsii_.Get(
+		j,
+		"grants",
 		&returns,
 	)
 	return returns
@@ -276,8 +292,8 @@ func (j *jsiiProxy_GithubActionsRole) RoleName() *string {
 	return returns
 }
 
-func (j *jsiiProxy_GithubActionsRole) RoleRef() *awsiam.RoleReference {
-	var returns *awsiam.RoleReference
+func (j *jsiiProxy_GithubActionsRole) RoleRef() *interfacesawsiam.RoleReference {
+	var returns *interfacesawsiam.RoleReference
 	_jsii_.Get(
 		j,
 		"roleRef",

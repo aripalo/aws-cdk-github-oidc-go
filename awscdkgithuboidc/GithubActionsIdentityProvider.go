@@ -7,6 +7,8 @@ import (
 	"github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v4/internal"
 	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
+	"github.com/aws/aws-cdk-go/awscdk/v2/interfaces"
+	"github.com/aws/aws-cdk-go/awscdk/v2/interfaces/interfacesawsiam"
 	"github.com/aws/constructs-go/constructs/v10"
 )
 
@@ -23,14 +25,15 @@ type GithubActionsIdentityProvider interface {
 	IGithubActionsIdentityProvider
 	// The environment this resource belongs to.
 	//
-	// For resources that are created and managed by the CDK
-	// (generally, those created by creating new class instances like Role, Bucket, etc.),
-	// this is always the same as the environment of the stack they belong to;
-	// however, for imported resources
-	// (those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-	// that might be different than the stack they were imported into.
+	// For resources that are created and managed in a Stack (those created by
+	// creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+	// is always the same as the environment of the stack they belong to.
+	//
+	// For referenced resources (those obtained from referencing methods like
+	// `Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+	// different than the stack they were imported into.
 	// Experimental.
-	Env() *awscdk.ResourceEnvironment
+	Env() *interfaces.ResourceEnvironment
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
@@ -42,10 +45,16 @@ type GithubActionsIdentityProvider interface {
 	OidcProviderIssuer() *string
 	// A reference to a OIDCProvider resource.
 	// Experimental.
-	OidcProviderRef() *awsiam.OIDCProviderReference
+	OidcProviderRef() *interfacesawsiam.OIDCProviderReference
 	// The thumbprints configured for this provider.
 	// Experimental.
 	OidcProviderThumbprints() *string
+	// The Amazon Resource Name (ARN) of the IAM OpenID Connect provider.
+	// Deprecated: Use `oidcProviderArn` instead. This property exists for backward compatibility with existing constructs as migrating between the 2 constructs (OpenIdConnectProvider and OidcProviderNative) is not reasonably feasible as it requires a manual step (cdk import) since the resource type is changing between OpenIdConnectProvider and OidcProviderNative.
+	OpenIdConnectProviderArn() *string
+	// The issuer for OIDC Provider.
+	// Deprecated: use `oidcProviderIssuer` instead. This property exists for backward compatibility with existing constructs as migrating between the 2 constructs (OpenIdConnectProvider and OidcProviderNative) is not reasonably feasible as it requires a manual step (cdk import) since the resource type is changing between OpenIdConnectProvider and OidcProviderNative.
+	OpenIdConnectProviderIssuer() *string
 	// Returns a string-encoded token that resolves to the physical name that should be passed to the CloudFormation resource.
 	//
 	// This value will resolve to one of the following:
@@ -97,8 +106,8 @@ type jsiiProxy_GithubActionsIdentityProvider struct {
 	jsiiProxy_IGithubActionsIdentityProvider
 }
 
-func (j *jsiiProxy_GithubActionsIdentityProvider) Env() *awscdk.ResourceEnvironment {
-	var returns *awscdk.ResourceEnvironment
+func (j *jsiiProxy_GithubActionsIdentityProvider) Env() *interfaces.ResourceEnvironment {
+	var returns *interfaces.ResourceEnvironment
 	_jsii_.Get(
 		j,
 		"env",
@@ -137,8 +146,8 @@ func (j *jsiiProxy_GithubActionsIdentityProvider) OidcProviderIssuer() *string {
 	return returns
 }
 
-func (j *jsiiProxy_GithubActionsIdentityProvider) OidcProviderRef() *awsiam.OIDCProviderReference {
-	var returns *awsiam.OIDCProviderReference
+func (j *jsiiProxy_GithubActionsIdentityProvider) OidcProviderRef() *interfacesawsiam.OIDCProviderReference {
+	var returns *interfacesawsiam.OIDCProviderReference
 	_jsii_.Get(
 		j,
 		"oidcProviderRef",
@@ -152,6 +161,26 @@ func (j *jsiiProxy_GithubActionsIdentityProvider) OidcProviderThumbprints() *str
 	_jsii_.Get(
 		j,
 		"oidcProviderThumbprints",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_GithubActionsIdentityProvider) OpenIdConnectProviderArn() *string {
+	var returns *string
+	_jsii_.Get(
+		j,
+		"openIdConnectProviderArn",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_GithubActionsIdentityProvider) OpenIdConnectProviderIssuer() *string {
+	var returns *string
+	_jsii_.Get(
+		j,
+		"openIdConnectProviderIssuer",
 		&returns,
 	)
 	return returns
@@ -186,17 +215,17 @@ func (j *jsiiProxy_GithubActionsIdentityProvider) Stack() awscdk.Stack {
 //   new GithubActionsIdentityProvider(scope, "GithubProvider");
 //
 // Experimental.
-func NewGithubActionsIdentityProvider(scope constructs.Construct, id *string) GithubActionsIdentityProvider {
+func NewGithubActionsIdentityProvider(scope constructs.Construct, id *string, props *GithubActionsIdentityProviderProps) GithubActionsIdentityProvider {
 	_init_.Initialize()
 
-	if err := validateNewGithubActionsIdentityProviderParameters(scope, id); err != nil {
+	if err := validateNewGithubActionsIdentityProviderParameters(scope, id, props); err != nil {
 		panic(err)
 	}
 	j := jsiiProxy_GithubActionsIdentityProvider{}
 
 	_jsii_.Create(
 		"aws-cdk-github-oidc.GithubActionsIdentityProvider",
-		[]interface{}{scope, id},
+		[]interface{}{scope, id, props},
 		&j,
 	)
 
@@ -211,12 +240,12 @@ func NewGithubActionsIdentityProvider(scope constructs.Construct, id *string) Gi
 //   new GithubActionsIdentityProvider(scope, "GithubProvider");
 //
 // Experimental.
-func NewGithubActionsIdentityProvider_Override(g GithubActionsIdentityProvider, scope constructs.Construct, id *string) {
+func NewGithubActionsIdentityProvider_Override(g GithubActionsIdentityProvider, scope constructs.Construct, id *string, props *GithubActionsIdentityProviderProps) {
 	_init_.Initialize()
 
 	_jsii_.Create(
 		"aws-cdk-github-oidc.GithubActionsIdentityProvider",
-		[]interface{}{scope, id},
+		[]interface{}{scope, id, props},
 		g,
 	)
 }

@@ -36,7 +36,7 @@ func validateGithubActionsIdentityProvider_IsResourceParameters(construct constr
 	return nil
 }
 
-func validateNewGithubActionsIdentityProviderParameters(scope constructs.Construct, id *string) error {
+func validateNewGithubActionsIdentityProviderParameters(scope constructs.Construct, id *string, props *GithubActionsIdentityProviderProps) error {
 	return nil
 }
 
