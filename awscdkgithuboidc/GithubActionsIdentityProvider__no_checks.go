@@ -20,7 +20,7 @@ func validateGithubActionsIdentityProvider_FromAccountParameters(scope construct
 	return nil
 }
 
-func validateGithubActionsIdentityProvider_FromOidcProviderArnParameters(scope constructs.Construct, id *string, oidcProviderArn *string) error {
+func validateGithubActionsIdentityProvider_FromOpenIdConnectProviderArnParameters(scope constructs.Construct, id *string, openIdConnectProviderArn *string) error {
 	return nil
 }
 

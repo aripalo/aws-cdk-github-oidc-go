@@ -144,3 +144,11 @@ jobs:
 ```
 
 <br/>
+
+## Migration Guide
+
+* [v2→v3](#v2v3)
+
+### v2→v3
+
+No additional steps required, as the v3 major version does not introduce any breaking changes (just a lot of internal tooling changes).
