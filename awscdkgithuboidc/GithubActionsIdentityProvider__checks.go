@@ -54,7 +54,7 @@ func validateGithubActionsIdentityProvider_FromAccountParameters(scope construct
 	return nil
 }
 
-func validateGithubActionsIdentityProvider_FromOpenIdConnectProviderArnParameters(scope constructs.Construct, id *string, openIdConnectProviderArn *string) error {
+func validateGithubActionsIdentityProvider_FromOidcProviderArnParameters(scope constructs.Construct, id *string, oidcProviderArn *string) error {
 	if scope == nil {
 		return fmt.Errorf("parameter scope is required, but nil was provided")
 	}
@@ -63,8 +63,8 @@ func validateGithubActionsIdentityProvider_FromOpenIdConnectProviderArnParameter
 		return fmt.Errorf("parameter id is required, but nil was provided")
 	}
 
-	if openIdConnectProviderArn == nil {
-		return fmt.Errorf("parameter openIdConnectProviderArn is required, but nil was provided")
+	if oidcProviderArn == nil {
+		return fmt.Errorf("parameter oidcProviderArn is required, but nil was provided")
 	}
 
 	return nil

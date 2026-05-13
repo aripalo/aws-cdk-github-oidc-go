@@ -1,10 +1,10 @@
 package awscdkgithuboidc
 
 import (
-	_init_ "github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v3/jsii"
+	_init_ "github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v4/jsii"
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
 
-	"github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v3/internal"
+	"github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v4/internal"
 	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/aws-cdk-go/awscdk/v2/interfaces"
@@ -15,11 +15,13 @@ import (
 // Github Actions as OpenID Connect Identity Provider for AWS IAM. There can be only one (per AWS Account).
 //
 // Use `fromAccount` to retrieve a reference to existing Github OIDC provider.
+//
+// Uses the native CloudFormation resource AWS::IAM::OIDCProvider (no Lambda functions).
 // See: https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
 //
 // Experimental.
 type GithubActionsIdentityProvider interface {
-	awsiam.OpenIdConnectProvider
+	awsiam.OidcProviderNative
 	IGithubActionsIdentityProvider
 	// The environment this resource belongs to.
 	//
@@ -35,18 +37,24 @@ type GithubActionsIdentityProvider interface {
 	// The tree node.
 	// Experimental.
 	Node() constructs.Node
+	// The Amazon Resource Name (ARN) of the Native IAM OpenID Connect provider.
+	// Experimental.
+	OidcProviderArn() *string
+	// The issuer for the Native OIDC Provider.
+	// Experimental.
+	OidcProviderIssuer() *string
 	// A reference to a OIDCProvider resource.
 	// Experimental.
 	OidcProviderRef() *interfacesawsiam.OIDCProviderReference
-	// The Amazon Resource Name (ARN) of the IAM OpenID Connect provider.
-	// Experimental.
-	OpenIdConnectProviderArn() *string
-	// The issuer for OIDC Provider.
-	// Experimental.
-	OpenIdConnectProviderIssuer() *string
 	// The thumbprints configured for this provider.
 	// Experimental.
-	OpenIdConnectProviderthumbprints() *string
+	OidcProviderThumbprints() *string
+	// The Amazon Resource Name (ARN) of the IAM OpenID Connect provider.
+	// Deprecated: Use `oidcProviderArn` instead. This property exists for backward compatibility with existing constructs as migrating between the 2 constructs (OpenIdConnectProvider and OidcProviderNative) is not reasonably feasible as it requires a manual step (cdk import) since the resource type is changing between OpenIdConnectProvider and OidcProviderNative.
+	OpenIdConnectProviderArn() *string
+	// The issuer for OIDC Provider.
+	// Deprecated: use `oidcProviderIssuer` instead. This property exists for backward compatibility with existing constructs as migrating between the 2 constructs (OpenIdConnectProvider and OidcProviderNative) is not reasonably feasible as it requires a manual step (cdk import) since the resource type is changing between OpenIdConnectProvider and OidcProviderNative.
+	OpenIdConnectProviderIssuer() *string
 	// Returns a string-encoded token that resolves to the physical name that should be passed to the CloudFormation resource.
 	//
 	// This value will resolve to one of the following:
@@ -94,7 +102,7 @@ type GithubActionsIdentityProvider interface {
 
 // The jsii proxy struct for GithubActionsIdentityProvider
 type jsiiProxy_GithubActionsIdentityProvider struct {
-	internal.Type__awsiamOpenIdConnectProvider
+	internal.Type__awsiamOidcProviderNative
 	jsiiProxy_IGithubActionsIdentityProvider
 }
 
@@ -118,11 +126,41 @@ func (j *jsiiProxy_GithubActionsIdentityProvider) Node() constructs.Node {
 	return returns
 }
 
+func (j *jsiiProxy_GithubActionsIdentityProvider) OidcProviderArn() *string {
+	var returns *string
+	_jsii_.Get(
+		j,
+		"oidcProviderArn",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_GithubActionsIdentityProvider) OidcProviderIssuer() *string {
+	var returns *string
+	_jsii_.Get(
+		j,
+		"oidcProviderIssuer",
+		&returns,
+	)
+	return returns
+}
+
 func (j *jsiiProxy_GithubActionsIdentityProvider) OidcProviderRef() *interfacesawsiam.OIDCProviderReference {
 	var returns *interfacesawsiam.OIDCProviderReference
 	_jsii_.Get(
 		j,
 		"oidcProviderRef",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_GithubActionsIdentityProvider) OidcProviderThumbprints() *string {
+	var returns *string
+	_jsii_.Get(
+		j,
+		"oidcProviderThumbprints",
 		&returns,
 	)
 	return returns
@@ -143,16 +181,6 @@ func (j *jsiiProxy_GithubActionsIdentityProvider) OpenIdConnectProviderIssuer() 
 	_jsii_.Get(
 		j,
 		"openIdConnectProviderIssuer",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_GithubActionsIdentityProvider) OpenIdConnectProviderthumbprints() *string {
-	var returns *string
-	_jsii_.Get(
-		j,
-		"openIdConnectProviderthumbprints",
 		&returns,
 	)
 	return returns
@@ -179,7 +207,7 @@ func (j *jsiiProxy_GithubActionsIdentityProvider) Stack() awscdk.Stack {
 }
 
 
-// Define a new Github OpenID Connect Identity PRovider for AWS IAM.
+// Define a new Github OpenID Connect Identity Provider for AWS IAM.
 //
 // There can be only one (per AWS Account).
 //
@@ -204,7 +232,7 @@ func NewGithubActionsIdentityProvider(scope constructs.Construct, id *string, pr
 	return &j
 }
 
-// Define a new Github OpenID Connect Identity PRovider for AWS IAM.
+// Define a new Github OpenID Connect Identity Provider for AWS IAM.
 //
 // There can be only one (per AWS Account).
 //
@@ -254,18 +282,18 @@ func GithubActionsIdentityProvider_FromAccount(scope constructs.Construct, id *s
 
 // Imports an Open ID connect provider from an ARN.
 // Experimental.
-func GithubActionsIdentityProvider_FromOpenIdConnectProviderArn(scope constructs.Construct, id *string, openIdConnectProviderArn *string) awsiam.IOpenIdConnectProvider {
+func GithubActionsIdentityProvider_FromOidcProviderArn(scope constructs.Construct, id *string, oidcProviderArn *string) awsiam.IOidcProvider {
 	_init_.Initialize()
 
-	if err := validateGithubActionsIdentityProvider_FromOpenIdConnectProviderArnParameters(scope, id, openIdConnectProviderArn); err != nil {
+	if err := validateGithubActionsIdentityProvider_FromOidcProviderArnParameters(scope, id, oidcProviderArn); err != nil {
 		panic(err)
 	}
-	var returns awsiam.IOpenIdConnectProvider
+	var returns awsiam.IOidcProvider
 
 	_jsii_.StaticInvoke(
 		"aws-cdk-github-oidc.GithubActionsIdentityProvider",
-		"fromOpenIdConnectProviderArn",
-		[]interface{}{scope, id, openIdConnectProviderArn},
+		"fromOidcProviderArn",
+		[]interface{}{scope, id, oidcProviderArn},
 		&returns,
 	)
 
