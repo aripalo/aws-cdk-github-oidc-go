@@ -1,10 +1,10 @@
 package awscdkgithuboidc
 
 import (
-	_init_ "github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v4/jsii"
+	_init_ "github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v5/jsii"
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
 
-	"github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v4/internal"
+	"github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v5/internal"
 	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/aws-cdk-go/awscdk/v2/interfaces"
@@ -49,11 +49,15 @@ type GithubActionsIdentityProvider interface {
 	// The thumbprints configured for this provider.
 	// Experimental.
 	OidcProviderThumbprints() *string
-	// The Amazon Resource Name (ARN) of the IAM OpenID Connect provider.
-	// Deprecated: Use `oidcProviderArn` instead. This property exists for backward compatibility with existing constructs as migrating between the 2 constructs (OpenIdConnectProvider and OidcProviderNative) is not reasonably feasible as it requires a manual step (cdk import) since the resource type is changing between OpenIdConnectProvider and OidcProviderNative.
+	// Alias for `oidcProviderArn` to maintain backwards compatibility for constructs which accept `iam.IOpenIdConnectProvider`.
+	//
+	// Use `oidcProviderArn` instead. This property exists for backward compatibility with existing constructs as migrating between the 2 constructs (OpenIdConnectProvider and OidcProviderNative) is not reasonably feasible as it requires a manual step (cdk import) since the resource type is changing between OpenIdConnectProvider and OidcProviderNative.
+	// Experimental.
 	OpenIdConnectProviderArn() *string
-	// The issuer for OIDC Provider.
-	// Deprecated: use `oidcProviderIssuer` instead. This property exists for backward compatibility with existing constructs as migrating between the 2 constructs (OpenIdConnectProvider and OidcProviderNative) is not reasonably feasible as it requires a manual step (cdk import) since the resource type is changing between OpenIdConnectProvider and OidcProviderNative.
+	// Alias for `oidcProviderIssuer` to maintain backwards compatibility for constructs which accept `iam.IOpenIdConnectProvider.
+	//
+	// Use `oidcProviderIssuer` instead. This property exists for backward compatibility with existing constructs as migrating between the 2 constructs (OpenIdConnectProvider and OidcProviderNative) is not reasonably feasible as it requires a manual step (cdk import) since the resource type is changing between OpenIdConnectProvider and OidcProviderNative.
+	// Experimental.
 	OpenIdConnectProviderIssuer() *string
 	// Returns a string-encoded token that resolves to the physical name that should be passed to the CloudFormation resource.
 	//
@@ -67,6 +71,15 @@ type GithubActionsIdentityProvider interface {
 	// The stack in which this resource is defined.
 	// Experimental.
 	Stack() awscdk.Stack
+	// Override the cross-stack reference strength for this resource.
+	//
+	// When set, any cross-stack reference to this resource will use the specified
+	// mechanism instead of the global default determined by the
+	// `@aws-cdk/core:defaultCrossStackReferences` context key. This is useful for
+	// selectively weakening specific references to avoid the "deadly embrace" problem
+	// without changing the app-wide default.
+	// Experimental.
+	ApplyCrossStackReferenceStrength(strength awscdk.ReferenceStrength)
 	// Apply the given removal policy to this resource.
 	//
 	// The Removal Policy controls what happens to this resource when it stops
@@ -98,6 +111,14 @@ type GithubActionsIdentityProvider interface {
 	// Returns a string representation of this construct.
 	// Experimental.
 	ToString() *string
+	// Applies one or more mixins to this construct.
+	//
+	// Mixins are applied in order. The list of constructs is captured at the
+	// start of the call, so constructs added by a mixin will not be visited.
+	// Use multiple `with()` calls if subsequent mixins should apply to added
+	// constructs.
+	// Experimental.
+	With(mixins ...constructs.IMixin) constructs.IConstruct
 }
 
 // The jsii proxy struct for GithubActionsIdentityProvider
@@ -398,6 +419,17 @@ func GithubActionsIdentityProvider_PROPERTY_INJECTION_ID() *string {
 	return returns
 }
 
+func (g *jsiiProxy_GithubActionsIdentityProvider) ApplyCrossStackReferenceStrength(strength awscdk.ReferenceStrength) {
+	if err := g.validateApplyCrossStackReferenceStrengthParameters(strength); err != nil {
+		panic(err)
+	}
+	_jsii_.InvokeVoid(
+		g,
+		"applyCrossStackReferenceStrength",
+		[]interface{}{strength},
+	)
+}
+
 func (g *jsiiProxy_GithubActionsIdentityProvider) ApplyRemovalPolicy(policy awscdk.RemovalPolicy) {
 	if err := g.validateApplyRemovalPolicyParameters(policy); err != nil {
 		panic(err)
@@ -461,6 +493,24 @@ func (g *jsiiProxy_GithubActionsIdentityProvider) ToString() *string {
 		g,
 		"toString",
 		nil, // no parameters
+		&returns,
+	)
+
+	return returns
+}
+
+func (g *jsiiProxy_GithubActionsIdentityProvider) With(mixins ...constructs.IMixin) constructs.IConstruct {
+	args := []interface{}{}
+	for _, a := range mixins {
+		args = append(args, a)
+	}
+
+	var returns constructs.IConstruct
+
+	_jsii_.Invoke(
+		g,
+		"with",
+		args,
 		&returns,
 	)
 

@@ -4,6 +4,10 @@ package awscdkgithuboidc
 
 // Building without runtime type checking enabled, so all the below just return nil
 
+func (g *jsiiProxy_GithubActionsIdentityProvider) validateApplyCrossStackReferenceStrengthParameters(strength awscdk.ReferenceStrength) error {
+	return nil
+}
+
 func (g *jsiiProxy_GithubActionsIdentityProvider) validateApplyRemovalPolicyParameters(policy awscdk.RemovalPolicy) error {
 	return nil
 }

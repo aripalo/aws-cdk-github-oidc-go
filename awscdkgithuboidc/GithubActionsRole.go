@@ -1,10 +1,10 @@
 package awscdkgithuboidc
 
 import (
-	_init_ "github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v4/jsii"
+	_init_ "github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v5/jsii"
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
 
-	"github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v4/internal"
+	"github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v5/internal"
 	"github.com/aws/aws-cdk-go/awscdk/v2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/aws-cdk-go/awscdk/v2/interfaces"
@@ -109,6 +109,15 @@ type GithubActionsRole interface {
 	// If there is no default policy attached to this role, it will be created.
 	// Experimental.
 	AddToPrincipalPolicy(statement awsiam.PolicyStatement) *awsiam.AddToPrincipalPolicyResult
+	// Override the cross-stack reference strength for this resource.
+	//
+	// When set, any cross-stack reference to this resource will use the specified
+	// mechanism instead of the global default determined by the
+	// `@aws-cdk/core:defaultCrossStackReferences` context key. This is useful for
+	// selectively weakening specific references to avoid the "deadly embrace" problem
+	// without changing the app-wide default.
+	// Experimental.
+	ApplyCrossStackReferenceStrength(strength awscdk.ReferenceStrength)
 	// Skip applyRemovalPolicy if role synthesis is prevented by customizeRoles.
 	//
 	// Because in this case, this construct does not have a CfnResource in the tree.
@@ -146,6 +155,14 @@ type GithubActionsRole interface {
 	// Returns a string representation of this construct.
 	// Experimental.
 	ToString() *string
+	// Applies one or more mixins to this construct.
+	//
+	// Mixins are applied in order. The list of constructs is captured at the
+	// start of the call, so constructs added by a mixin will not be visited.
+	// Use multiple `with()` calls if subsequent mixins should apply to added
+	// constructs.
+	// Experimental.
+	With(mixins ...constructs.IMixin) constructs.IConstruct
 	// Return a copy of this Role object whose Policies will not be updated.
 	//
 	// Use the object returned by this method if you want this Role to be used by
@@ -632,6 +649,17 @@ func (g *jsiiProxy_GithubActionsRole) AddToPrincipalPolicy(statement awsiam.Poli
 	return returns
 }
 
+func (g *jsiiProxy_GithubActionsRole) ApplyCrossStackReferenceStrength(strength awscdk.ReferenceStrength) {
+	if err := g.validateApplyCrossStackReferenceStrengthParameters(strength); err != nil {
+		panic(err)
+	}
+	_jsii_.InvokeVoid(
+		g,
+		"applyCrossStackReferenceStrength",
+		[]interface{}{strength},
+	)
+}
+
 func (g *jsiiProxy_GithubActionsRole) ApplyRemovalPolicy(policy awscdk.RemovalPolicy) {
 	if err := g.validateApplyRemovalPolicyParameters(policy); err != nil {
 		panic(err)
@@ -759,6 +787,24 @@ func (g *jsiiProxy_GithubActionsRole) ToString() *string {
 		g,
 		"toString",
 		nil, // no parameters
+		&returns,
+	)
+
+	return returns
+}
+
+func (g *jsiiProxy_GithubActionsRole) With(mixins ...constructs.IMixin) constructs.IConstruct {
+	args := []interface{}{}
+	for _, a := range mixins {
+		args = append(args, a)
+	}
+
+	var returns constructs.IConstruct
+
+	_jsii_.Invoke(
+		g,
+		"with",
+		args,
 		&returns,
 	)
 

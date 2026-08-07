@@ -1,7 +1,7 @@
 package awscdkgithuboidc
 
 import (
-	"github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v4/internal"
+	"github.com/aripalo/aws-cdk-github-oidc-go/awscdkgithuboidc/v5/internal"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 )
 

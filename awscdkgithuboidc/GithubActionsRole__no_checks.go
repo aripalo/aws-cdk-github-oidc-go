@@ -16,6 +16,10 @@ func (g *jsiiProxy_GithubActionsRole) validateAddToPrincipalPolicyParameters(sta
 	return nil
 }
 
+func (g *jsiiProxy_GithubActionsRole) validateApplyCrossStackReferenceStrengthParameters(strength awscdk.ReferenceStrength) error {
+	return nil
+}
+
 func (g *jsiiProxy_GithubActionsRole) validateApplyRemovalPolicyParameters(policy awscdk.RemovalPolicy) error {
 	return nil
 }
