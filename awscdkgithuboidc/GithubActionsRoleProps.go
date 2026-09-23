@@ -44,6 +44,9 @@ type GithubActionsRoleProps struct {
 	Repo *string `field:"required" json:"repo" yaml:"repo"`
 	// Subject condition filter, appended after `repo:${owner}/${repo}:` string in IAM Role trust relationship.
 	//
+	// With `ownerId` & `repoId` given, appended after
+	// `repo:${owner}@${ownerId}/${repo}@${repoId}:` instead.
+	//
 	// Example:
 	//   'ref:refs/tags/v*'
 	//   'ref:refs/heads/demo-branch'
@@ -58,6 +61,32 @@ type GithubActionsRoleProps struct {
 	//
 	// Experimental.
 	Filter *string `field:"optional" json:"filter" yaml:"filter"`
+	// Numeric Github ID of the repository owner (organization or user), which makes the subject immutable.
+	//
+	// Must be given together with `repoId`.
+	//
+	// Example:
+	//   '123456'
+	//
+	// See: https://docs.github.com/en/actions/reference/security/oidc#immutable-subject-claims
+	//
+	// Default: - subject refers to the owner and repository by name.
+	//
+	// Experimental.
+	OwnerId *string `field:"optional" json:"ownerId" yaml:"ownerId"`
+	// Numeric Github ID of the repository, which makes the subject immutable.
+	//
+	// Must be given together with `ownerId`.
+	//
+	// Example:
+	//   '456789'
+	//
+	// See: https://docs.github.com/en/actions/reference/security/oidc#immutable-subject-claims
+	//
+	// Default: - subject refers to the owner and repository by name.
+	//
+	// Experimental.
+	RepoId *string `field:"optional" json:"repoId" yaml:"repoId"`
 	// A description of the role.
 	//
 	// It can be up to 1000 characters long.
